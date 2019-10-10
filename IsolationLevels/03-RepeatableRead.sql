@@ -13,8 +13,10 @@ END
 GO
 
 RESTORE DATABASE ZipCodeData
-FROM DISK = 'C:\Demos\Isolation\ZipCodeData.bak'
-WITH REPLACE, CHECKSUM;
+FROM DISK = '/var/opt/mssql/backup/ZipCodeData2.bak'
+WITH MOVE 'ZipCodes' TO '/var/opt/mssql/data/ZipCodeData.mdf',
+MOVE 'ZipCodes_log' TO '/var/opt/mssql/log/ZipCodeData.ldf',
+REPLACE;
 
 /*======================================================
 Row-Locking Behavior
@@ -54,14 +56,14 @@ SET NOCOUNT ON;
 SET TRANSACTION ISOLATION LEVEL REPEATABLE READ
 
 -- Now, in this session, let's count how many zip codes
--- 10,000 times.
+-- 100 times.
 IF OBJECT_ID('dbo.ZipCodeCounts') IS NOT NULL
 	DROP TABLE dbo.ZipCodeCounts;
 CREATE TABLE dbo.ZipCodeCounts (n INT);
 GO
 
 DECLARE @i INT = 1;
-WHILE @i <= 1000
+WHILE @i <= 100
 BEGIN
 	INSERT INTO dbo.ZipCodeCounts
 	SELECT COUNT(*)

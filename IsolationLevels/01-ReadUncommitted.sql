@@ -13,8 +13,10 @@ END
 GO
 
 RESTORE DATABASE ZipCodeData
-FROM DISK = 'C:\Demos\Isolation\ZipCodeData.bak'
-WITH REPLACE, CHECKSUM;
+FROM DISK = '/var/opt/mssql/backup/ZipCodeData2.bak'
+WITH MOVE 'ZipCodes' TO '/var/opt/mssql/data/ZipCodeData.mdf',
+MOVE 'ZipCodes_log' TO '/var/opt/mssql/log/ZipCodeData.ldf',
+REPLACE;
 
 
 
@@ -56,7 +58,7 @@ No Locks? Hogwash!
 -- create an XE session to look for locks
 CREATE EVENT SESSION [Locks] ON SERVER 
 ADD EVENT sqlserver.lock_acquired(
-    WHERE ([sqlserver].[session_id]=(55))) -- update to current session number
+    WHERE ([sqlserver].[session_id]=(54))) -- update to current session number
 ADD TARGET package0.ring_buffer(SET max_events_limit=(0),max_memory=(10240))
 WITH (MAX_DISPATCH_LATENCY=1 SECONDS)
 GO

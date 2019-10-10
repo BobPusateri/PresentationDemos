@@ -1,4 +1,25 @@
 /*======================================================
+Restore our database
+======================================================*/
+USE master;
+GO
+
+IF DB_ID('ZipCodeData') IS NOT NULL
+BEGIN
+	ALTER DATABASE ZipCodeData
+		SET SINGLE_USER
+		WITH ROLLBACK IMMEDIATE;
+END
+GO
+
+RESTORE DATABASE ZipCodeData
+FROM DISK = '/var/opt/mssql/backup/ZipCodeData2.bak'
+WITH MOVE 'ZipCodes' TO '/var/opt/mssql/data/ZipCodeData.mdf',
+MOVE 'ZipCodes_log' TO '/var/opt/mssql/log/ZipCodeData.ldf',
+REPLACE;
+
+
+/*======================================================
 What's our isolation level?
 ======================================================*/
 DBCC USEROPTIONS;

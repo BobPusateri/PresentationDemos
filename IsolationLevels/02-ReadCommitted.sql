@@ -13,8 +13,10 @@ END
 GO
 
 RESTORE DATABASE ZipCodeData
-FROM DISK = 'C:\Demos\Isolation\ZipCodeData.bak'
-WITH REPLACE, CHECKSUM;
+FROM DISK = '/var/opt/mssql/backup/ZipCodeData2.bak'
+WITH MOVE 'ZipCodes' TO '/var/opt/mssql/data/ZipCodeData.mdf',
+MOVE 'ZipCodes_log' TO '/var/opt/mssql/log/ZipCodeData.ldf',
+REPLACE;
 
 
 
@@ -38,7 +40,7 @@ FROM sys.dm_db_index_physical_stats
 	(SELECT index_id FROM sys.indexes WHERE name = 'ix_ZipCodes_ZipCode'),
 	NULL, 'DETAILED')
 ORDER BY index_type_desc, index_level DESC;
--- 41,437 rows on 77 pages (at the leaf level)
+-- 41,437 rows
 
 
 /*======================================================
@@ -165,19 +167,19 @@ SET NOCOUNT ON;
 GO
 UPDATE dbo.ZipCodes SET ZipCode = '99999' WHERE ZipCode = '00501';
 UPDATE dbo.ZipCodes SET ZipCode = '00501' WHERE ZipCode = '99999';
-GO 50000
+GO 5000
 /*======================================================*/
 
 
 -- Now, in this session, let's count how many zip codes there are
--- 10,000 times.
+-- 1,000 times.
 IF OBJECT_ID('dbo.ZipCodeCounts') IS NOT NULL
 	DROP TABLE dbo.ZipCodeCounts;
 CREATE TABLE dbo.ZipCodeCounts (n INT);
 GO
 
 DECLARE @i INT = 1;
-WHILE @i <= 10000
+WHILE @i <= 1000
 BEGIN
 	INSERT INTO dbo.ZipCodeCounts
 	SELECT COUNT(*)

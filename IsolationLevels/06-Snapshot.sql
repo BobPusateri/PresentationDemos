@@ -13,30 +13,21 @@ END
 GO
 
 RESTORE DATABASE ZipCodeData
-FROM DISK = 'C:\Demos\Isolation\ZipCodeData.bak'
-WITH REPLACE, CHECKSUM;
+FROM DISK = '/var/opt/mssql/backup/ZipCodeData2.bak'
+WITH MOVE 'ZipCodes' TO '/var/opt/mssql/data/ZipCodeData.mdf',
+MOVE 'ZipCodes_log' TO '/var/opt/mssql/log/ZipCodeData.ldf',
+REPLACE;
 
 
 -- Allow Snapshot
 ALTER DATABASE ZipCodeData
 SET ALLOW_SNAPSHOT_ISOLATION ON;
 
-
-/*======================================================
-What isolation level are we in?
-======================================================*/
-USE ZipCodeData
+USE ZipCodeData;
 GO
 
-DBCC USEROPTIONS
-
--- we're still in Read Committed!
-
--- Let's enable snapshot instead
+-- Enable Snapshot
 SET TRANSACTION ISOLATION LEVEL SNAPSHOT;
-
-DBCC USEROPTIONS
--- much better :)
 
 
 /*======================================================
@@ -89,7 +80,7 @@ BEGIN TRAN
 
 SELECT ZipCode, CityName, StateName
 FROM dbo.ZipCodes
-WHERE CityName = 'Pekin' AND StateName = 'IL'
+WHERE CityName = 'Riverside' AND StateName = 'IL'
 
 
 -- *** In another session
@@ -99,13 +90,13 @@ BEGIN TRAN
 
 UPDATE dbo.ZipCodes
 SET ZipCode = '99998'
-WHERE CityName = 'Pekin' AND StateName = 'IL'
+WHERE CityName = 'Riverside' AND StateName = 'IL'
 -- **************************************
 
 -- in this session
 UPDATE dbo.ZipCodes
 SET ZipCode = '77777'
-WHERE CityName = 'Pekin' AND StateName = 'IL'
+WHERE CityName = 'Riverside' AND StateName = 'IL'
 -- this will block!
 
 -- *** In another session
