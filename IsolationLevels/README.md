@@ -2,6 +2,7 @@
 
 * [ZipCodeData Demo Database](https://www.bobpusateri.com/r/IsolationLevels-DB-GitHub)
 * [Slide Deck](https://www.bobpusateri.com/r/IsolationLevels-Deck-GitHub)
+* [Presentation Video from GroupBy Conference](https://www.youtube.com/watch?v=w8nw47jfh44)
 
 ### Abstract
 The ability for multiple processes to query and update a database concurrently has long-been a hallmark of database technology, but this feature can be implemented in many ways. This session will explore the different isolation levels supported by SQL Server and Azure SQL Database, why they exist, how they work, how they differ, and how In-Memory OLTP fits in. Demonstrations will also show how different isolation levels can determine not only the performance, but also the result set returned by a query.
