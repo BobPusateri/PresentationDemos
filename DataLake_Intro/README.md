@@ -7,6 +7,7 @@
 * [Melissa Coates has many great blog posts](https://www.sqlchick.com/entries/tag/Azure+Data+Lake)
 * [Run U-SQL Locally](https://docs.microsoft.com/en-us/azure/data-lake-analytics/data-lake-analytics-data-lake-tools-local-run)
 * [U-SQL Tutorial](https://saveenr.gitbooks.io/usql-tutorial/content/)
+* [Free Azure Databricks Trial](https://docs.microsoft.com/en-us/azure/databricks/getting-started/try-databricks)
 * [Querying Data in Azure Data Lake with Power BI](https://www.sqlchick.com/entries/2018/5/6/querying-data-in-azure-data-lake-store-with-power-bi)
 * [10 Things to know about Azure Data Lake Storage Gen 2](https://www.blue-granite.com/blog/10-things-to-know-about-azure-data-lake-storage-gen2)
 
