@@ -8,6 +8,7 @@
 
 ### Resources
 * [Microsoft Workshop on Big Data Clusters Architecture](https://github.com/microsoft/sqlworkshops-bdc)
+* [What is a SQL Server Big Data Cluster?](https://www.bobpusateri.com/archive/2020/12/what-is-a-sql-server-big-data-cluster/)
 * [Anthony Nocentino's Blog](https://www.centinosystems.com/blog/)
 * [Klaus Aschenbrenner's Blog](https://www.sqlpassion.at/blog/)
 * [Mohammad Darab's Site](https://mohammaddarab.com/bdc/)
