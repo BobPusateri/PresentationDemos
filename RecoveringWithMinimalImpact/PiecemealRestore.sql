@@ -3,7 +3,11 @@ USE [master]
 GO
 RESTORE DATABASE DemoData
 FROM DISK = 'C:\Demos\AdvRestore\DemoData.bak'
-WITH REPLACE;
+WITH REPLACE,
+MOVE 'DemoData' TO 'D:\Data\DemoData.mdf',
+MOVE 'ZipCodeData' TO 'D:\Data\ZipCodeData.ndf',
+MOVE 'TowData' TO 'D:\Data\TowData.ndf',
+MOVE 'DemoData_log' TO 'D:\Data\DemoData.ldf';
 
 
 -- BACKUP DATABASE
@@ -43,6 +47,7 @@ SELECT *
 FROM sys.filegroups;
 
 
+-- What are the file name(s) for each filegroup?
 SELECT 
 	fg.name as FilegroupName, 
 	f.name as FileName,
@@ -50,7 +55,7 @@ SELECT
 FROM sys.database_files f
 INNER JOIN sys.filegroups fg ON fg.data_space_id = f.data_space_id; 
 
-
+-- What Objects in each filegroup?
 SELECT 
 	o.name AS ObjectName,
 	p.index_id AS IndexID,

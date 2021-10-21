@@ -6,8 +6,11 @@ GO
 -- RESTORE DATABASE
 RESTORE DATABASE DemoData
 FROM DISK = 'C:\Demos\AdvRestore\DemoData.bak'
-WITH REPLACE;
-
+WITH REPLACE,
+MOVE 'DemoData' TO 'D:\Data\DemoData.mdf',
+MOVE 'ZipCodeData' TO 'D:\Data\ZipCodeData.ndf',
+MOVE 'TowData' TO 'D:\Data\TowData.ndf',
+MOVE 'DemoData_log' TO 'D:\Data\DemoData.ldf';
 
 
 
@@ -45,13 +48,12 @@ AND StateName = 'IL';
 DELETE
 FROM dbo.ZipCodes
 WHERE ZipCode = '60515';
-SELECT GETDATE(); -- 2020-10-26 15:54:57.650
+SELECT GETDATE(); -- 
 
 -- Let's mess up!
 UPDATE dbo.ZipCodes
 SET StateName = 'WA'
--- WHERE StateName = 'wa'
-SELECT GETDATE(); -- 2020-10-26 15:55:37.687
+SELECT GETDATE(); -- 
 
 
 SELECT *
@@ -72,10 +74,10 @@ DROP DATABASE DemoData_Restored;
 RESTORE DATABASE DemoData_Restored
 FROM DISK = 'C:\Demos\AdvRestore\DemoData_PITFull.bak'
 WITH NORECOVERY,
-MOVE 'DemoData' TO 'C:\Demos\AdvRestore\DemoData-Restored.mdf',
-MOVE 'DemoData_log' TO 'C:\Demos\AdvRestore\DemoData-Restored.ldf',
-MOVE 'ZipCodeData' TO 'C:\Demos\AdvRestore\Demo_ZipCodeData-Restored.ndf',
-MOVE 'TowData' TO 'C:\Demos\AdvRestore\Demo_TowData-Restored.ndf';
+MOVE 'DemoData' TO 'D:\Data\DemoData-Restored.mdf',
+MOVE 'DemoData_log' TO 'D:\Data\DemoData-Restored.ldf',
+MOVE 'ZipCodeData' TO 'D:\Data\Demo_ZipCodeData-Restored.ndf',
+MOVE 'TowData' TO 'D:\Data\Demo_TowData-Restored.ndf';
 
 RESTORE LOG DemoData_Restored
 FROM DISK = 'C:\Demos\AdvRestore\DemoData_PIT1.trn'
@@ -115,16 +117,6 @@ WHERE ZipCode = '60515'
 
 
 
--- But what if you don't know the exact time the disaster occurred?
-USE [DemoData]
-GO
-
-SELECT [Current LSN], Operation, Context, AllocUnitName, [Page ID], [Begin Time], [Transaction Name]
-FROM fn_dblog(NULL, NULL);
-
-
-
-
 -- == MARKED TRANSACTIONS ==
 
 USE [DemoData_Restored]
@@ -154,10 +146,10 @@ WITH COMPRESSION, CHECKSUM, INIT, FORMAT;
 RESTORE DATABASE DemoData_Restored2
 FROM DISK = 'C:\Demos\AdvRestore\DemoDataRestored_PITFull.bak'
 WITH NORECOVERY,
-MOVE 'DemoData' TO 'C:\Demos\AdvRestore\DemoData-Restored2.mdf',
-MOVE 'DemoData_log' TO 'C:\Demos\AdvRestore\DemoData-Restored2.ldf',
-MOVE 'ZipCodeData' TO 'C:\Demos\AdvRestore\Demo_ZipCodeData-Restored2.ndf',
-MOVE 'TowData' TO 'C:\Demos\AdvRestore\Demo_TowData-Restored2.ndf';
+MOVE 'DemoData' TO 'D:\Data\DemoData-Restored2.mdf',
+MOVE 'DemoData_log' TO 'D:\Data\DemoData-Restored2.ldf',
+MOVE 'ZipCodeData' TO 'D:\Data\Demo_ZipCodeData-Restored2.ndf',
+MOVE 'TowData' TO 'D:\Data\Demo_TowData-Restored2.ndf';
 
 RESTORE LOG DemoData_Restored2
 FROM DISK = 'C:\Demos\AdvRestore\DemoDataRestored_PIT.trn'
