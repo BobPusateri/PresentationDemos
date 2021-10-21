@@ -1,6 +1,7 @@
 # Recovering With Minimal Impact: Advanced Database Restore Methods
 
 * [Demo Database](https://bobpusateri.blob.core.windows.net/shared/DemoData/DemoData.bak)
+* [Slide Deck from PASS Summit 2021](https://bobpusateri.blob.core.windows.net/shared/DemoData/RecoveringWithMinimalImpact-PASS2021.pdf)
 
 
 ### Abstract
