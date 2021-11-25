@@ -1,6 +1,7 @@
 # The ABCs of BDCs: Big Data Clusters for Beginners
 
 * [Slide Deck](https://bobpusateri.blob.core.windows.net/shared/DemoData/ABCsOfBDCs_Deck.pdf)
+* [Video of this session from PASS Summit 2020](https://youtu.be/U5iBJNtswio)
 
 ### Data used in Demos
 * [Airlines](https://www.kaggle.com/open-flights/airline-database)
