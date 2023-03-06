@@ -2,6 +2,7 @@
 
 * [Parking Tickets Demo Database](https://bobpusateri.blob.core.windows.net/shared/DemoData/ParkingTicketsDemoDB.7z)
 * [Slide Deck](https://bobpusateri.blob.core.windows.net/shared/DemoData/EightKB_Data_Compression.pdf)
+* [Video of this presentation from EightKB](https://www.youtube.com/watch?v=C5BxRvY8sfQ)
 
 ### Resources
 * Bradley Ball (posting for [SQL University](http://sqlchicken.com/sql-university/)) [has](http://www.sqlballs.com/2011/10/sql-university-compression-week-lesson.html) [three](http://www.sqlballs.com/2011/10/lesson-2-internal-structures-vardecimal.html) [posts](http://www.sqlballs.com/2011/10/sql-university-lesson-3-page.html) on data compression
